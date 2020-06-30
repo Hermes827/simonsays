@@ -1,0 +1,40 @@
+.App {
+  text-align: center;
+
+}
+
+.simon {
+  border-style: solid;
+  border-width: medium;
+  border-color: black;
+}
+
+.test {
+  /* border-style: solid;
+  border-width: medium;
+  border-color: black; */
+}
+
+.div1 {
+  background-color: green;
+  width: 10em;
+  height: 10em;
+}
+
+.div2 {
+  background-color: red;
+  width: 10em;
+  height: 10em;
+}
+
+.div3 {
+  background-color: yellow;
+  width: 10em;
+  height: 10em;
+}
+
+.div4 {
+  background-color: blue;
+  width: 10em;
+  height: 10em;
+}
