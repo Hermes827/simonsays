@@ -1,18 +1,10 @@
-import React from 'react';
-// import Container from 'react-bootstrap/Container'
-// import Row from 'react-bootstrap/Row'
-// import Col from 'react-bootstrap/Col'
-// import Button from 'react-bootstrap/Button';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class CenterConsole extends React.Component{
-
-  constructor(){
-  super()
-  this.state = {
+class CreateTodo extends Component {
+  state = {
     text: ''
   };
-}
 
   handleChange = event => {
     this.setState({
@@ -25,16 +17,9 @@ class CenterConsole extends React.Component{
     this.props.addTodo(this.state);
   };
 
-  signup = () => {
-    console.log(this.props)
-  }
-
-  render(){
-  return (
-    <div>
-      <div className="title">Simon</div>
-      <button onClick={null}>Log In</button>
-      <button onClick={this.signup}>Sign Up</button>
+  render() {
+    return (
+      <div>
         <form onSubmit={event => this.handleSubmit(event)}>
           <p>
             <label>add todo</label>
@@ -46,9 +31,10 @@ class CenterConsole extends React.Component{
           </p>
           <input type="submit" />
         </form>
-    </div>
-  );
-}
+  
+      </div>
+    );
+  }
 }
 
 const mapDispatchToProps = dispatch => {
@@ -60,4 +46,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   null,
   mapDispatchToProps
-)(CenterConsole);
+)(CreateTodo);
