@@ -4,14 +4,23 @@ import React from 'react';
 // import Col from 'react-bootstrap/Col'
 // import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
+import Signup from './signup.js'
+import Login from './login.js'
 
 class CenterConsole extends React.Component{
 
   constructor(){
   super()
   this.state = {
-    text: ''
+    text: '',
+    signup: false,
+    login: false
   };
+
+  this.signup = this.signup.bind(this)
+  this.login = this.login.bind(this)
+  this.renderPage = this.renderPage.bind(this)
+  // this.renderSignup = this.renderSignup.bind(this)
 }
 
   handleChange = event => {
@@ -25,31 +34,79 @@ class CenterConsole extends React.Component{
     this.props.addTodo(this.state);
   };
 
-  signup = () => {
-    console.log(this.props)
+  signup(e){
+    console.log(e.target.innerHTML === "Sign Up")
+    this.setState({
+      signup: true
+    })
+  }
+
+  renderPage(e){
+    if(this.state.signup === true){
+      return(
+        <Signup/>
+      )
+    } else if(this.state.login === true){
+    return(
+      <Login/>
+    )
+  } else {
+      return(
+        <>
+        <div className="title">Simon</div>
+        <button onClick={this.login}>Log In</button>
+        <button onClick={this.signup}>Sign Up</button>
+        </>
+      )
+    }
+  }
+
+  login(){
+    console.log("hi")
+    this.setState({
+      login: true
+    })
+  }
+
+  renderLogin(){
+    if(this.state.login === true){
+      return(
+        <Login/>
+      )
+    } else {
+      return(
+        <>
+        <div className="title">Simon</div>
+        <button onClick={this.login}>Log In</button>
+        <button onClick={this.signup}>Sign Up</button>
+        </>
+      )
+    }
   }
 
   render(){
+    let random = "login"
   return (
     <div>
-      <div className="title">Simon</div>
-      <button onClick={null}>Log In</button>
-      <button onClick={this.signup}>Sign Up</button>
-        <form onSubmit={event => this.handleSubmit(event)}>
-          <p>
-            <label>add todo</label>
-              <input
-                type="text"
-                onChange={event => this.handleChange(event)}
-                value={this.state.text}
-              />
-          </p>
-          <input type="submit" />
-        </form>
+
+      {this.renderPage()}
     </div>
   );
 }
 }
+
+// <form onSubmit={event => this.handleSubmit(event)}>
+//   <p>
+//     <label>add todo</label>
+//       <input
+//         type="text"
+//         onChange={event => this.handleChange(event)}
+//         value={this.state.text}
+//       />
+//   </p>
+//   <input type="submit" />
+// </form>
+
 
 const mapDispatchToProps = dispatch => {
   return {
