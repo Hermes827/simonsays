@@ -1,7 +1,10 @@
 import React from 'react';
-import CenterConsole from './centerConsole.js'
+// import Container from 'react-bootstrap/Container'
+// import Row from 'react-bootstrap/Row'
+// import Col from 'react-bootstrap/Col'
+// import Button from 'react-bootstrap/Button';
 
-class Simon extends React.Component{
+class Test extends React.Component{
 
   render(){
   return (
@@ -9,9 +12,6 @@ class Simon extends React.Component{
       <div className="topHalf">
       <div className="div1">1</div>
       <div className="div2">2</div>
-      </div>
-      <div className="center">
-        <CenterConsole/>
       </div>
       <div className="lowerHalf">
       <div className="div3">3</div>
@@ -22,4 +22,4 @@ class Simon extends React.Component{
 }
 }
 
-export default Simon;
+export default Test;
