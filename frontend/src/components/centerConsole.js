@@ -35,7 +35,6 @@ class CenterConsole extends React.Component{
   };
 
   signup(e){
-    console.log(e.target.innerHTML === "Sign Up")
     this.setState({
       signup: true
     })
