@@ -4,11 +4,18 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import manageTodo from './reducers/manageTodo';
+import manageSignupData from './reducers/manageSignupData';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import rootReducer from './reducers'
 
-let store = createStore(manageTodo);
+let store = createStore(manageSignupData);
+// const store = createStore(
+//   rootReducer,
+//   composeWithDevTools(applyMiddleware(thunk))
+// )
 
 ReactDOM.render(
   <Provider store={store}>
