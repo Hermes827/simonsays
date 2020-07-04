@@ -7,19 +7,20 @@ class Signup extends React.Component{
     super()
 
     this.state = {
-      text: ''
+      username: ''
     }
   }
 
   handleChange = event => {
     this.setState({
-      text: event.target.value
+      username: event.target.value
     });
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.addTodo(this.state);
+    console.log(this.state)
+    this.props.addSignupData(this.state);
   };
 
   render() {
@@ -31,12 +32,12 @@ class Signup extends React.Component{
               <input
                 type="text"
                 onChange={event => this.handleChange(event)}
-                value={this.state.text}
+                value={this.state.username}
               />
           </p>
           <input type="submit" />
         </form>
-        {console.log(this.props.todos)}
+        {console.log(this.props)}
       </div>
     );
   }
@@ -44,12 +45,12 @@ class Signup extends React.Component{
 
 const mapDispatchToProps = dispatch => {
   return {
-    addTodo: formData => dispatch({ type: 'ADD_TODO', payload: formData })
+    addSignupData: formData => dispatch({ type: 'ADD_SIGNUP_DATA', payload: formData })
   };
 };
 
 const mapStateToProps = (state) => ({
-  todos: state.todos
+  username: state.username
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

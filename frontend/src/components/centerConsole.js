@@ -107,12 +107,13 @@ class CenterConsole extends React.Component{
 // </form>
 
 
-const mapDispatchToProps = dispatch => {
-  return {
-    addTodo: formData => dispatch({ type: 'ADD_TODO', payload: formData })
-  };
-};
-
-
-
-export default connect(null, mapDispatchToProps)(CenterConsole);
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     addTodo: formData => dispatch({ type: 'ADD_TODO', payload: formData })
+//   };
+// };
+//
+//
+//
+// export default connect(null, mapDispatchToProps)(CenterConsole);
+export default CenterConsole
