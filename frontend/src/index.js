@@ -6,6 +6,8 @@ import * as serviceWorker from './serviceWorker';
 import manageTodo from './reducers/manageTodo';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension'
+
 let store = createStore(manageTodo);
 
 ReactDOM.render(

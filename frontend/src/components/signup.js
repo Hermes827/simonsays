@@ -27,7 +27,7 @@ class Signup extends React.Component{
       <div>
         <form onSubmit={event => this.handleSubmit(event)}>
           <p>
-            <label>add todo</label>
+            <label>Username</label>
               <input
                 type="text"
                 onChange={event => this.handleChange(event)}
@@ -36,7 +36,7 @@ class Signup extends React.Component{
           </p>
           <input type="submit" />
         </form>
-        {console.log(this.props)}
+        {console.log(this.props.todos)}
       </div>
     );
   }
@@ -48,7 +48,8 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Signup);
+const mapStateToProps = (state) => ({
+  todos: state.todos
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

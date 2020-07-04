@@ -113,7 +113,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(CenterConsole);
+
+
+export default connect(null, mapDispatchToProps)(CenterConsole);
