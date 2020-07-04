@@ -117,3 +117,34 @@
   border-color: #333333;
   border-radius: 20em;
 }
+
+.signup {
+  position: absolute;
+  width: 20em;
+  height: 20em;
+  border-style: solid;
+  border-width: 1em;
+  border-color: #333333;
+  border-radius: 20em;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: #ECE7EE;
+}
+
+.form {
+  margin: 1em;
+  margin-top: 2.5em;
+  /* height: 10em; */
+  /* margin: auto; */
+  /* width: 100%;
+  clear: both; */
+}
+
+.inputEmail {
+  margin-left: 2em;
+  /* width: 50%; */
+  /* clear: both; */
+}

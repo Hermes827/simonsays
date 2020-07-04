@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-let store = createStore(manageSignupData);
+let store = createStore(manageSignupData, composeWithDevTools());
 
 ReactDOM.render(
   <Provider store={store}>

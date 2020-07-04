@@ -7,37 +7,59 @@ class Signup extends React.Component{
     super()
 
     this.state = {
-      username: ''
+      username: "",
+      password: "",
+      email: ""
     }
   }
 
   handleChange = event => {
     this.setState({
-      username: event.target.value
+      [event.target.name]: event.target.value
     });
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state)
     this.props.addSignupData(this.state);
   };
 
   render() {
     return (
-      <div>
+      <div className="signup">
+        <div className="form">
+          <h1>Sign up!</h1>
         <form onSubmit={event => this.handleSubmit(event)}>
-          <p>
-            <label>Username</label>
+            <label>Username:
               <input
+                className="input"
                 type="text"
                 onChange={event => this.handleChange(event)}
                 value={this.state.username}
+                name="username"
               />
-          </p>
-          <input type="submit" />
+            </label><br/>
+            <label>Password:
+              <input
+                className="input"
+                type="text"
+                onChange={event => this.handleChange(event)}
+                value={this.state.password}
+                name="password"
+              />
+            </label><br/>
+            <label className="inputEmail">Email:
+              <input
+                type="text"
+                onChange={event => this.handleChange(event)}
+                value={this.state.email}
+                name="email"
+              />
+            </label><br/>
+          <input type="submit" /><button onClick={this.props.return}>Cancel</button>
         </form>
-        {console.log(this.props)}
+
+        </div>
       </div>
     );
   }
@@ -50,7 +72,9 @@ const mapDispatchToProps = dispatch => {
 };
 
 const mapStateToProps = (state) => ({
-  username: state.username
+  username: state.username,
+  password: state.password,
+  email: state.email
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

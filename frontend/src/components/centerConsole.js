@@ -14,6 +14,7 @@ class CenterConsole extends React.Component{
   this.signup = this.signup.bind(this)
   this.login = this.login.bind(this)
   this.renderPage = this.renderPage.bind(this)
+  this.returnHome = this.returnHome.bind(this)
 }
 
   signup(e){
@@ -29,10 +30,24 @@ class CenterConsole extends React.Component{
     })
   }
 
+  returnHome(){
+    this.setState({
+      signup: false,
+      login: false
+    })
+    return(
+    <>
+    <div className="title">Simon</div>
+    <button onClick={this.login}>Log In</button>
+    <button onClick={this.signup}>Sign Up</button>
+    </>
+    )
+  }
+
   renderPage(e){
     if(this.state.signup === true){
       return(
-        <Signup/>
+        <Signup return={this.returnHome}/>
       )
     } else if(this.state.login === true){
     return(
