@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Button from 'react-bootstrap/Button';
 
 class Signup extends React.Component{
 
@@ -56,7 +57,7 @@ class Signup extends React.Component{
                 name="email"
               />
             </label><br/>
-          <input type="submit" /><button onClick={this.props.return}>Cancel</button>
+            <Button variant="outline-dark" type="submit">Submit</Button><Button variant="outline-dark" onClick={this.props.return}>Cancel</Button>
         </form>
 
         </div>

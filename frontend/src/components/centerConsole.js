@@ -1,6 +1,7 @@
 import React from 'react';
 import Signup from './signup.js'
 import Login from './login.js'
+import Button from 'react-bootstrap/Button';
 
 class CenterConsole extends React.Component{
 
@@ -38,8 +39,8 @@ class CenterConsole extends React.Component{
     return(
     <>
     <div className="title">Simon</div>
-    <button onClick={this.login}>Log In</button>
-    <button onClick={this.signup}>Sign Up</button>
+    <Button variant="outline-dark" onClick={this.login}>Log In</Button>
+    <Button variant="outline-dark" onClick={this.signup}>Sign Up</Button>
     </>
     )
   }
@@ -51,14 +52,14 @@ class CenterConsole extends React.Component{
       )
     } else if(this.state.login === true){
     return(
-      <Login/>
+      <Login return={this.returnHome}/>
     )
   } else {
       return(
         <>
         <div className="title">Simon</div>
-        <button onClick={this.login}>Log In</button>
-        <button onClick={this.signup}>Sign Up</button>
+        <Button variant="outline-dark" onClick={this.login}>Log In</Button>
+        <Button variant="outline-dark" onClick={this.signup}>Sign Up</Button>
         </>
       )
     }
