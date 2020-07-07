@@ -21,7 +21,7 @@ class Login extends React.Component{
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.addSignupData(this.state);
+    this.props.addLoginData(this.state);
   };
 
   render() {
@@ -56,7 +56,7 @@ class Login extends React.Component{
                 name="email"
               />
             </label><br/>
-          <Button variant="outline-dark" type="submit">Submit</Button><Button variant="outline-dark" onClick={this.props.return}>Cancel</Button>
+          <Button variant="outline-dark" type="submit">Login</Button><Button variant="outline-dark" onClick={this.props.return}>Cancel</Button>
         </form>
 
         </div>
@@ -67,7 +67,7 @@ class Login extends React.Component{
 
 const mapDispatchToProps = dispatch => {
   return {
-    addSignupData: formData => dispatch({ type: 'ADD_SIGNUP_DATA', payload: formData })
+    addLoginData: formData => dispatch({ type: 'ADD_LOGIN_DATA', payload: formData })
   };
 };
 
