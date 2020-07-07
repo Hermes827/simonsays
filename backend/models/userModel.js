@@ -6,19 +6,18 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: [6, 'Too few characters'],
-    max: 12
+    maxlength: [20, 'Too many characters']
   },
     password: {
       type: String,
       required: true,
       minlength: [6, 'Too few characters'],
-      max: 12
+      maxlength: [20, 'Too many characters']
     },
     email: {
       type: String,
       required: true,
-      minlength: [6, 'Too few characters'],
-      max: 12
+      minlength: [6, 'Too few characters']
     },
     score: Number
   }
