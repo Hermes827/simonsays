@@ -1,37 +1,113 @@
-const express = require('express');
-const userModel = require('../models/userModel.js');
-const app = express();
-const cors = require('cors');
-app.use(cors());
+const auth = require("../middleware/auth");
+const bcrypt = require("bcrypt");
+const { User, validate } = require("../models/userModel");
+const express = require("express");
+const router = express.Router();
+// const cors = require('cors');
+// app.use(cors());
 
-app.get('/users', async (req, res) => {
-  const users = await userModel.find({});
-  try {
-    res.send(users);
-  } catch (err) {
-    res.status(500).send(err);
-  }
+router.get("/current", auth, async (req, res) => {
+  const user = await User.findById(req.user._id).select("-password");
+  res.send(user);
 });
 
-app.post('/users', async (req, res) => {
-  const user = new userModel(req.body);
-  try {
-    await user.save();
-    res.send(user);
-  } catch (err) {
-    res.status(500).send(err);
-  }
+router.post("/", async (req, res) => {
+  // validate the request body first
+  const { error } = validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  //find an existing user
+  let user = await User.findOne({ email: req.body.email });
+  if (user) return res.status(400).send("User already registered.");
+
+  user = new User({
+    name: req.body.name,
+    password: req.body.password,
+    email: req.body.email
+  });
+  user.password = await bcrypt.hash(user.password, 10);
+  await user.save();
+
+  const token = user.generateAuthToken();
+  res.header("x-auth-token", token).send({
+    _id: user._id,
+    name: user.name,
+    email: user.email
+  });
 });
 
-  app.delete('/user/:id', async (req, res) => {
-  try {
-    const stat = await userModel.findByIdAndDelete(req.params.id)
+module.exports = router;
 
-    if (!stat) res.status(404).send("No item found")
-    res.status(200).send()
-  } catch (err) {
-    res.status(500).send(err)
-  }
-})
+// const auth = require("../middleware/auth");
+// const bcrypt = require("bcrypt");
+// const { User, validate } = require("../models/userModel");
+// const router = express.Router();
+// const express = require('express');
+// const userModel = require('../models/userModel.js');
+// const app = express();
+// const cors = require('cors');
+// app.use(cors());
+//
+// router.get("/current", auth, async (req, res) => {
+//   const user = await User.findById(req.user._id).select("-password");
+//   res.send(user);
+// });
+//
+// router.post("/", async (req, res) => {
+//   // validate the request body first
+//   const { error } = validate(req.body);
+//   if (error) return res.status(400).send(error.details[0].message);
+//
+//   //find an existing user
+//   let user = await User.findOne({ email: req.body.email });
+//   if (user) return res.status(400).send("User already registered.");
+//
+//   user = new User({
+//     name: req.body.name,
+//     password: req.body.password,
+//     email: req.body.email
+//   });
+//   user.password = await bcrypt.hash(user.password, 10);
+//   await user.save();
+//
+//   const token = user.generateAuthToken();
+//   res.header("x-auth-token", token).send({
+//     _id: user._id,
+//     name: user.name,
+//     email: user.email
+//   });
+// });
+//
+// module.exports = router;
 
-module.exports = app
+// app.get('/users', async (req, res) => {
+//   const users = await userModel.find({});
+//   try {
+//     res.send(users);
+//   } catch (err) {
+//     res.status(500).send(err);
+//   }
+// });
+//
+// app.post('/users', async (req, res) => {
+//   const user = new userModel(req.body);
+//   try {
+//     await user.save();
+//     res.send(user);
+//   } catch (err) {
+//     res.status(500).send(err);
+//   }
+// });
+//
+//   app.delete('/user/:id', async (req, res) => {
+//   try {
+//     const stat = await userModel.findByIdAndDelete(req.params.id)
+//
+//     if (!stat) res.status(404).send("No item found")
+//     res.status(200).send()
+//   } catch (err) {
+//     res.status(500).send(err)
+//   }
+// })
+//
+// module.exports = app
