@@ -8,7 +8,7 @@ class Simon extends React.Component{
     <div className="simonUnit">
       <div className="divsContainer">
       <div className="topHalf">
-      <div className="div1"></div>
+      <div className={`div1`}></div>
       <div className="div2"></div>
       </div>
       <div className="center">
@@ -25,3 +25,5 @@ class Simon extends React.Component{
 }
 
 export default Simon;
+
+ // ${this.state.currentComputer === true ? "computerBannerActive" : ""}

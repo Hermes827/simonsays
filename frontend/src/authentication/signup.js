@@ -25,6 +25,10 @@ class Signup extends React.Component{
     this.props.addSignupData(this.state);
   };
 
+  check = () => {
+    console.log(this.props)
+  }
+
   render() {
     return (
       <div className="signup">
@@ -58,9 +62,10 @@ class Signup extends React.Component{
               />
             </label><br/>
             <Button variant="outline-dark" type="submit">Submit</Button><Button variant="outline-dark" onClick={this.props.return}>Cancel</Button>
-        </form>
 
+        </form>
         </div>
+        <button onClick={this.check}>check</button>
       </div>
     );
   }
@@ -75,7 +80,8 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = (state) => ({
   username: state.username,
   password: state.password,
-  email: state.email
+  email: state.email,
+  currentUser: state.currentUser
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);
