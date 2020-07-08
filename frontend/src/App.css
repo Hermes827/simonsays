@@ -148,3 +148,7 @@
   /* width: 50%; */
   /* clear: both; */
 }
+
+.glow {
+  opacity:1.0;
+}

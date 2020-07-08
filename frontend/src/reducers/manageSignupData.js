@@ -2,56 +2,8 @@ export const initialState = {
   username: "",
   password: "",
   email: "",
-  currentUser: {}
-}
-
-function createUser(arg){
-  console.log('hi')
-let myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
-let body = JSON.stringify({
-    "name": arg.payload.username,
-    "password": arg.payload.password,
-    "email": arg.payload.email
-    });
-
-let requestOptions = {
-   method: 'POST',
-   headers: myHeaders,
-   body: body,
-   redirect: 'follow'
-};
-
-fetch("http://localhost:3000/api/users", requestOptions)
-  .then(response => response.text())
-  .then(result => {
-    console.log(result)
-    initialState.setState({
-      currentUser: result
-    })
-  })
-  .catch(error => console.log('error', error));
-}
-
-/////////////////////////////////////////////////////////////////////
-
-function loginUser(arg){
-  console.log('hi')
-let myHeaders = new Headers();
-// myHeaders.append("x-access-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjA0NmE5ODQzYWNmMzA0ZGQyYTM5ZWUiLCJpYXQiOjE1OTQxMjQ5NTJ9.on70365mSl2LlbAlLaMT_VTYicdKCiBdIctZKD-PymY");
-myHeaders.append("Content-Type", "application/json");
-let body = ""
-
-let requestOptions = {
-  method: 'GET',
-  headers: myHeaders,
-  redirect: 'follow'
-};
-
-fetch("http://localhost:3000/api/users/current", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+  currentUser: {},
+  div: "div1"
 }
 
 export default function manageSignupData(state = initialState, action, saveData){
@@ -64,10 +16,10 @@ export default function manageSignupData(state = initialState, action, saveData)
       email: action.payload.email
     }
     break;
-    case 'ADD_LOGIN_DATA':
-    console.log("login user")
-    loginUser(action)
-    break;
+    // case 'ADD_LOGIN_DATA':
+    // console.log("login user")
+    // loginUser(action)
+    // break;
     default:
       return state
   }
