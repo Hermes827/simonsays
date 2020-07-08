@@ -25,8 +25,8 @@ makeMove(){
   let randomNum = Math.floor(Math.random()*4) + 1
   let randomDiv = document.querySelector(`.div${randomNum}`)
   if(randomDiv){
-  console.log(randomDiv)
-  console.log(this.props)
+  // console.log(randomDiv)
+  // console.log(this.props)
   this.props.increment()
 }
 }

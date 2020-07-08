@@ -8,6 +8,7 @@ class Simon extends React.Component{
   random(){
     if(this.props.clicked === true){
       console.log("hello")
+      console.log(this.props.div)
     }
   }
 
@@ -16,22 +17,25 @@ class Simon extends React.Component{
     <div className="simonUnit">
       <div className="divsContainer">
       <div className="topHalf">
-      <div className={`div1 ${this.props.clicked === true ? "glow" : ""}`}></div>
-      <div className="div2"></div>
+      <div className={`div1 ${this.props.div === "div1" ? "glow" : ""}`}></div>
+      <div className={`div2 ${this.props.div === "div2" ? "glow" : ""}`}></div>
+      </div>
+
+      <div className="lowerHalf">
+      <div className={`div3 ${this.props.div === "div3" ? "glow" : ""}`}></div>
+      <div className={`div4 ${this.props.div === "div4" ? "glow" : ""}`}></div>
+      </div>
       </div>
       <div className="center">
         <CenterConsole/>
-      </div>
-      <div className="lowerHalf">
-      <div className="div3"></div>
-      <div className="div4"></div>
-      </div>
       </div>
       {this.random()}
     </div>
   );
 }
 }
+
+//why is the ternary not working with the div1, div2 etc?
 
  // ${this.state.currentComputer === true ? "computerBannerActive" : ""}
 

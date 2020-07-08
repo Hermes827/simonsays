@@ -28,6 +28,7 @@
   border-style: solid;
   border-width: 0.5em;
   border-color: #333333;
+  filter: brightness(0.85);
 }
 
 .div2 {
@@ -38,6 +39,7 @@
   border-style: solid;
   border-width: 0.5em;
   border-color: #333333;
+  filter: brightness(0.85);
 }
 
 .lowerHalf {
@@ -53,6 +55,7 @@
   border-style: solid;
   border-width: 0.5em;
   border-color: #333333;
+  filter: brightness(0.85);
 }
 
 .div4 {
@@ -63,6 +66,7 @@
   border-style: solid;
   border-width: 0.5em;
   border-color: #333333;
+  filter: brightness(0.85);
 }
 
 .simonUnit {
@@ -150,5 +154,7 @@
 }
 
 .glow {
-  opacity:1.0;
+  /* -webkit-filter: brightness(200%); */
+  filter: brightness(1);
+  /* opacity: 90%; */
 }
