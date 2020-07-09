@@ -1,8 +1,13 @@
 export const INCREMENT = "INCREMENT";
-export const DECREMENT = "DECREMENT";
+export const ASSIGN_DIV = "ASSIGN_DIV";
+const CLICK = "CLICK";
 
-export function increment() {
-  return { type: INCREMENT };
+export function assignDiv() {
+  return { type: ASSIGN_DIV };
 }
 
-export const decrement = () => ({ type: DECREMENT });
+export function click() {
+  return { type: CLICK };
+}
+
+// export const decrement = () => ({ type: DECREMENT });

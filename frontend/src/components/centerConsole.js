@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
-import { increment } from '../action/index.js';
+import { assignDiv } from '../action/index.js';
 
 class CenterConsole extends React.Component{
 
@@ -25,9 +25,7 @@ makeMove(){
   let randomNum = Math.floor(Math.random()*4) + 1
   let randomDiv = document.querySelector(`.div${randomNum}`)
   if(randomDiv){
-  // console.log(randomDiv)
-  // console.log(this.props)
-  this.props.increment()
+  this.props.assignDiv()
 }
 }
 
@@ -57,7 +55,7 @@ makeMove(){
 // export default connect(mapStateToProps, mapDispatchToProps)(CenterConsole);
 
 const mapDispatchToProps = {
-  increment
+  assignDiv
 };
 
 const mapStateToProps = (state) => ({

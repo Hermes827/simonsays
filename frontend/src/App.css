@@ -29,6 +29,7 @@
   border-width: 0.5em;
   border-color: #333333;
   filter: brightness(0.85);
+  /* opacity: 90%; */
 }
 
 .div2 {
@@ -48,25 +49,25 @@
 }
 
 .div3 {
-  background-color: yellow;
+  background-color: #ffff33;
   width: 50%;
   height: 100%;
   float: left;
   border-style: solid;
   border-width: 0.5em;
   border-color: #333333;
-  filter: brightness(0.85);
+  filter: brightness(0.80);
 }
 
 .div4 {
-  background-color: blue;
+  background-color: #0066ff;
   width: 50%;
   height: 100%;
   float: right;
   border-style: solid;
   border-width: 0.5em;
   border-color: #333333;
-  filter: brightness(0.85);
+  filter: brightness(0.80);
 }
 
 .simonUnit {
@@ -154,7 +155,8 @@
 }
 
 .glow {
-  /* -webkit-filter: brightness(200%); */
-  filter: brightness(1);
-  /* opacity: 90%; */
+   filter: brightness(200%);
+   border-style: solid;
+   border-width: 0.5em;
+   border-color: #1a1a1a;
 }
