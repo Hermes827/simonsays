@@ -83,5 +83,5 @@ class Simon extends React.Component{
  })
 
  export default connect(mapStateToProps, mapDispatchToProps)(Simon);
-
+ 
   // || this.props.clicked === true

@@ -1,24 +1,19 @@
 import React from 'react';
 import CenterConsole from './centerConsole.js'
 import { connect } from 'react-redux';
-import { assignDiv } from '../action/index.js';
-import { click } from '../action/index.js';
-
+import { playerTurn } from '../action/index.js';
+import { computerTurn } from '../action/index.js';
 
 class Simon extends React.Component{
 
-  constructor(){
-    super()
-  }
-
-  random(){
-  }
-
   playAudio = (e) => {
+    console.log(this.props)
+    if(this.props.playerTurn !== true){return}
+    e.persist()
     e.target.classList.add('glow')
-    this.props.click()
     const audioEl = e.target.querySelector('audio')
     audioEl.play()
+    setTimeout(()=> e.target.classList.remove('glow'), 850)
 }
 
   render(){
@@ -37,7 +32,6 @@ class Simon extends React.Component{
         </audio>
       </div>
       </div>
-
       <div className="lowerHalf">
       <div className="div3" onClick={this.playAudio}>
         <audio className="audio-element">
@@ -59,14 +53,13 @@ class Simon extends React.Component{
 }
 }
 
- const mapDispatchToProps = {
-   assignDiv,
-   click
- };
+const mapDispatchToProps = {
+  playerTurn
+};
 
- const mapStateToProps = (state) => ({
-   clicked: state.clicked,
-   div: state.div
- })
+const mapStateToProps = (state) => ({
+  computerTurn: state.computerTurn,
+  playerTurn: state.playerTurn
+})
 
- export default connect(mapStateToProps, mapDispatchToProps)(Simon);
+export default connect(mapStateToProps, mapDispatchToProps)(Simon);
