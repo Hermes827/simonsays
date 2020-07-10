@@ -7,13 +7,14 @@ import { computerTurn } from '../action/index.js';
 class Simon extends React.Component{
 
   playAudio = (e) => {
-    console.log(this.props)
-    if(this.props.playerTurn !== true){return}
+    if(this.props.isPlayerTurn !== true){return}
     e.persist()
     e.target.classList.add('glow')
     const audioEl = e.target.querySelector('audio')
     audioEl.play()
     setTimeout(()=> e.target.classList.remove('glow'), 850)
+    // console.log(e.target.classList[0])
+    this.props.playerTurn(e.target.classList[0])
 }
 
   render(){
@@ -58,8 +59,8 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = (state) => ({
-  computerTurn: state.computerTurn,
-  playerTurn: state.playerTurn
+  isComputerTurn: state.isComputerTurn,
+  isPlayerTurn: state.isPlayerTurn
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Simon);

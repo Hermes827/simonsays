@@ -5,6 +5,7 @@ import { assignDiv } from '../action/index.js';
 import { computerTurn } from '../action/index.js';
 import { computerMakeMove } from '../action/index.js'
 import { playerTurn } from '../action/index.js';
+import { success } from '../action/index.js';
 
 class CenterConsole extends React.Component{
 
@@ -13,9 +14,16 @@ class CenterConsole extends React.Component{
 }
 
 computerMove = () => {
-  this.props.computerTurn()
+  // this.props.computerTurn()
   this.props.assignDiv()
   this.props.playerTurn()
+}
+
+win(){
+  if(this.props.computerLastSequence[0] === this.props.playerLastSequence[0]){
+    this.props.success()
+    // this.computerMove()
+  }
 }
 
   render(){
@@ -23,18 +31,24 @@ computerMove = () => {
     <div>
     <div className="title">Simon</div>
     <Button onClick={this.computerMove}>play</Button>
+    {console.log(this.props.computerLastSequence[0] === this.props.playerLastSequence[0])}
+    {console.log(this.props.playerLastSequence)}
+    {this.win()}
     </div>
   );
 }
 }
 
 const mapDispatchToProps = {
-  assignDiv, computerTurn, computerMakeMove, playerTurn
+  assignDiv, computerTurn, computerMakeMove, playerTurn, success
 };
 
 const mapStateToProps = (state) => ({
-  computerTurn: state.computerTurn,
-  playerTurn: state.playerTurn
+  isComputerTurn: state.isComputerTurn,
+  isPlayerTurn: state.isPlayerTurn,
+  computerLastSequence: state.computerLastSequence,
+  playerLastSequence: state.playerLastSequence,
+  hasSucceeded: state.hasSucceeded
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CenterConsole);
