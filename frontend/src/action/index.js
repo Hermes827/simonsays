@@ -23,7 +23,8 @@ export function computerMakeMove(){
 }
 
 export function playerTurn(arg){
-
+  const audioEl = arg.target.querySelector('audio')
+  audioEl.play()
   return { type: PLAYER_TURN, payload: [arg]}
 }
 

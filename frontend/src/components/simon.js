@@ -6,16 +6,23 @@ import { computerTurn } from '../action/index.js';
 
 class Simon extends React.Component{
 
+//   playAudio = (e) => {
+//     if(this.props.isPlayerTurn !== true){return}
+//     e.persist()
+//     e.target.classList.add('glow')
+//     const audioEl = e.target.querySelector('audio')
+//     audioEl.play()
+//     setTimeout(()=> e.target.classList.remove('glow'), 850)
+//     // console.log(e.target.classList[0])
+//     this.props.playerTurn(e.target.classList[0])
+// }
+
   playAudio = (e) => {
-    if(this.props.isPlayerTurn !== true){return}
-    e.persist()
-    e.target.classList.add('glow')
-    const audioEl = e.target.querySelector('audio')
-    audioEl.play()
-    setTimeout(()=> e.target.classList.remove('glow'), 850)
-    // console.log(e.target.classList[0])
-    this.props.playerTurn(e.target.classList[0])
-}
+    // const audioEl = e.target.querySelector('audio')
+    // audioEl.play()
+    this.props.playerTurn(e)
+  }
+
 
   render(){
   return (
