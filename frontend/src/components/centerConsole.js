@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 // import { computerMakeMove } from '../action/index.js'
 // import { playerTurn } from '../action/index.js';
 // import { success } from '../action/index.js';
+import { computerActs } from '../action/index.js';
 
 class CenterConsole extends React.Component{
 
@@ -13,11 +14,9 @@ class CenterConsole extends React.Component{
   super()
 
   this.state = {
-    computerTurn: false,
     playerTurn: false,
-    currentPlayer: "",
     number: [],
-    random: ""
+    score: 0
   }
 
 }
@@ -35,25 +34,21 @@ class CenterConsole extends React.Component{
 //   }
 // }
 
-beginGame = () => {
-  // this.setComputerTurn()
-  this.computerActs()
-  // this.setPlayerTurn()
-}
+// beginGame = () => {
+//   this.computerActs()
+// }
 
-computerActs(){
-  let randomNum = Math.floor(Math.random()*4) + 1
-  this.setState(
-    {
-    number: [...this.state.number, randomNum],
-    playerTurn: true
-  },
-    function(){console.log(this.state.number.join())},
-    setTimeout(() => this.playerActs(), 2000)
-  )
-
-   // function() { console.log("setState completed", this.state)})
-}
+// computerActs(){
+//   let randomNum = Math.floor(Math.random()*4) + 1
+//   this.setState(
+//     {
+//     number: [...this.state.number, randomNum],
+//     playerTurn: true
+//   },
+//     function(){console.log(this.state.number.join())},
+//     setTimeout(() => this.playerActs(), 2000)
+//   )
+// }
 
 playerActs(){
   if(this.state.playerTurn != true){return}
@@ -61,49 +56,53 @@ playerActs(){
   let intNumber = parseInt(number)
   if(number === this.state.number.join()){
     this.setState({
-      playerTurn: false
+      playerTurn: false,
+      score: this.state.score + 10
     })
     setTimeout(() => this.computerActs(), 1000)
+  } else if(number === null){
+    alert("do you want to quit?")
   } else {
     console.log("game over")
     this.setState({
-      number: []
+      number: [],
+      score: 0
     })
   }
 }
 
-setComputerTurn(){
-  this.setState({
-    computerTurn: true,
-    playerTurn: false
-  })
-}
+// setComputerTurn(){
+//   this.setState({
+//     computerTurn: true,
+//     playerTurn: false
+//   })
+// }
+//
+// setPlayerTurn(){
+//   this.setState({
+//     computerTurn: false,
+//     playerTurn: true
+//   })
+// }
 
-setPlayerTurn(){
-  this.setState({
-    computerTurn: false,
-    playerTurn: true
-  })
-}
-
-playerActionTurn = () => {
-  // if(this.state.computerTurn === true){return}
-  this.playerActs()
-}
-
-showState = () => {
-  console.log(this.state)
-}
-
-setPlayerTurn(){}
+// playerActionTurn = () => {
+//   // if(this.state.computerTurn === true){return}
+//   this.playerActs()
+// }
+//
+// showState = () => {
+//   console.log(this.state)
+// }
+//
+// setPlayerTurn(){}
 
   render(){
   return (
     <div>
     <div className="title">Simon</div>
-    <Button onClick={this.beginGame}>begin</Button>
-
-    <Button onClick={this.showState}>show state</Button>
+    <Button onClick={this.props.computerActs}>begin</Button>
+    <h1>{this.state.score}</h1>
+    {console.log(this.props.state)}
     </div>
   );
 }
@@ -111,6 +110,7 @@ setPlayerTurn(){}
 
 const mapDispatchToProps = {
   // assignDiv, computerTurn, computerMakeMove, playerTurn, success
+  computerActs
 };
 
 const mapStateToProps = (state) => ({
@@ -119,6 +119,9 @@ const mapStateToProps = (state) => ({
   // computerLastSequence: state.computerLastSequence,
   // playerLastSequence: state.playerLastSequence,
   // hasSucceeded: state.hasSucceeded
+  playerTurn: state.playerTurn,
+  number: state.number,
+  score: state.score
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CenterConsole);

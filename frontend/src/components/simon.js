@@ -1,8 +1,8 @@
 import React from 'react';
 import CenterConsole from './centerConsole.js'
 import { connect } from 'react-redux';
-import { playerTurn } from '../action/index.js';
-import { computerTurn } from '../action/index.js';
+// import { playerTurn } from '../action/index.js';
+// import { computerTurn } from '../action/index.js';
 
 class Simon extends React.Component{
 
@@ -18,9 +18,10 @@ class Simon extends React.Component{
 // }
 
   playAudio = (e) => {
-    // const audioEl = e.target.querySelector('audio')
-    // audioEl.play()
-    this.props.playerTurn(e)
+    if(this.props.playerTurn !== true){return}
+    const audioEl = e.target.querySelector('audio')
+    audioEl.play()
+    // this.props.playerTurn(e)
   }
 
 
@@ -62,12 +63,15 @@ class Simon extends React.Component{
 }
 
 const mapDispatchToProps = {
-  playerTurn
+  // playerTurn
 };
 
 const mapStateToProps = (state) => ({
-  isComputerTurn: state.isComputerTurn,
-  isPlayerTurn: state.isPlayerTurn
+  // isComputerTurn: state.isComputerTurn,
+  // isPlayerTurn: state.isPlayerTurn
+  playerTurn: state.playerTurn,
+  number: state.number,
+  score: state.score
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Simon);
