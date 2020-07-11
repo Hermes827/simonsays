@@ -6,11 +6,30 @@
 // const PLAYER_TURN = "PLAYER_TURN"
 // const SUCCESS = "SUCCESS"
 const COMPUTERACTS = 'COMPUTER_ACTS'
+const PLAYERACTS = 'PLAYER_ACTS'
+const SCOREPOINT = 'SCORE_POINT'
+const YO = 'YO'
+const WASSUP = 'WASSUP'
 
 export function computerActs(){
   return { type: COMPUTERACTS }
 }
 
+export function playerActs(e){
+  return { type: PLAYERACTS, payload: e}
+}
+
+export function scorePoint(){
+  return { type: SCOREPOINT }
+}
+
+export function yo(){
+  return { type: YO }
+}
+
+export function wassup(){
+  return { type: WASSUP }
+}
 
 //
 // export function assignDiv() {

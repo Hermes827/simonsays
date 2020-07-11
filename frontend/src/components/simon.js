@@ -1,53 +1,56 @@
 import React from 'react';
 import CenterConsole from './centerConsole.js'
 import { connect } from 'react-redux';
-// import { playerTurn } from '../action/index.js';
-// import { computerTurn } from '../action/index.js';
+import { playerActs } from '../action/index.js';
+import { computerActs } from '../action/index.js';
 
 class Simon extends React.Component{
 
-//   playAudio = (e) => {
-//     if(this.props.isPlayerTurn !== true){return}
-//     e.persist()
-//     e.target.classList.add('glow')
-//     const audioEl = e.target.querySelector('audio')
-//     audioEl.play()
-//     setTimeout(()=> e.target.classList.remove('glow'), 850)
-//     // console.log(e.target.classList[0])
-//     this.props.playerTurn(e.target.classList[0])
-// }
-
-  playAudio = (e) => {
-    if(this.props.playerTurn !== true){return}
-    const audioEl = e.target.querySelector('audio')
-    audioEl.play()
-    // this.props.playerTurn(e)
+  playerTurn = (e) => {
+    this.props.playerActs(e)
+    setTimeout(() => this.computerTurn(), 2000)
   }
 
+  recursionFunc(i){
+    const computerActs = this.props.computerActs
+    const helperFunction = function(arg){
+       return arg()
+     }
+    setTimeout(function(){
+        helperFunction(computerActs);
+    }, 2000 * i);
+  }
+
+  computerTurn = () => {
+    for (let i=0; i<3; i++) {
+     this.recursionFunc(i);
+  }
+  }
 
   render(){
   return (
     <div className="simonUnit">
+
       <div className="divsContainer">
       <div className="topHalf">
-      <div className="div1" onClick={this.playAudio}>
+      <div className="div1" onClick={this.playerTurn}>
         <audio className="audio-element">
           <source src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"></source>
         </audio>
       </div>
-      <div className="div2" onClick={this.playAudio}>
+      <div className="div2" onClick={this.playerTurn}>
         <audio className="audio-element">
           <source src="https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"></source>
         </audio>
       </div>
       </div>
       <div className="lowerHalf">
-      <div className="div3" onClick={this.playAudio}>
+      <div className="div3" onClick={this.playerTurn}>
         <audio className="audio-element">
           <source src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"></source>
         </audio>
       </div>
-      <div className="div4" onClick={this.playAudio}>
+      <div className="div4" onClick={this.playerTurn}>
         <audio className="audio-element">
           <source src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"></source>
         </audio>
@@ -63,12 +66,10 @@ class Simon extends React.Component{
 }
 
 const mapDispatchToProps = {
-  // playerTurn
+  playerActs, computerActs
 };
 
 const mapStateToProps = (state) => ({
-  // isComputerTurn: state.isComputerTurn,
-  // isPlayerTurn: state.isPlayerTurn
   playerTurn: state.playerTurn,
   number: state.number,
   score: state.score

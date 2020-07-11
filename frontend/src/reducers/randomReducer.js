@@ -14,52 +14,118 @@ function removeGlow(arg){
 }
 
 function playAudio(arg){
-  let audioEl = arg.querySelector('audio')
+  const divElement = document.querySelector(arg)
+  let audioEl = divElement.querySelector('audio')
   audioEl.play()
-//fix the audio function with arg, arg not working
-  // this.props.playerTurn(e)
 }
-
-//helper varibles
 
 function glow(arg){
   const divElement = document.querySelector(arg)
-  console.log(divElement)
   divElement.classList.add("glow")
   setTimeout(() => removeGlow(divElement), 850)
 }
 
-// const divElement = document.getElementsByClassName(randomDiv)
-// console.log(divElement)
-// divElement[0].classList.add("glow")
-
-///////////////////////////
-
 const initialState = {
   playerTurn: false,
-  number: [],
+  computerTurn: true,
+  computerPicks: [],
+  playerPicks: [],
   score: 0
 }
 
+function hello(){
+  console.log("hi")
+}
+
+function whatsup(){
+  console.log("whats up")
+}
+
+function combinedFunction(arg){
+  glow(arg)
+  playAudio(arg)
+}
+
+function comparePicks(state){
+  console.log(state.computerPicks.join())
+  console.log(state.playerPicks.join())
+  console.log(state.computerPicks.join() === state.playerPicks.join())
+  console.log(state.computerPicks === state.playerPicks)
+}
+
+/////////////////////////////////////////////////////////
+
 export function reducer(state = initialState, action) {
-  console.log('reducer', state, action);
+  // console.log('reducer', state, action);
   switch(action.type){
 
     case 'COMPUTER_ACTS':
     let randomDiv = `.div${(Math.floor(Math.random()*4) + 1)}`
     glow(randomDiv)
     playAudio(randomDiv)
+    console.log(state)
+    comparePicks(state)
     return Object.assign({}, state, {
-     number: [],
+     computerPicks: [...state.computerPicks, randomDiv.slice(1,5)],
      playerTurn: true
    });
 
-    return
+   case 'PLAYER_ACTS':
+    if(state.playerTurn != true){return}
+    const divClassName = "." + action.payload.target.classList[0]
+    glow(divClassName)
+    playAudio(divClassName)
+    return Object.assign({}, state, {
+     playerPicks: [...state.playerPicks, divClassName.slice(1,5)],
+     playerTurn: false
+   })
+
+   case 'SCORE_POINT':
+   console.log(state)
+   return
+
+   case 'YO':
+   hello()
+   return
+
+   case 'WASSUP':
+   whatsup()
+   return
 
     default:
       return state
   }
 }
+
+// console.log(state.playerPicks)
+ // if(state.playerPicks[0] === state.computerPicks[0]){
+ //   console.log("cool")
+ // }
+//  return Object.assign({}, state, {
+//   playerPicks: [],
+//   playerTurn: false
+// });
+
+// playerActs(){
+//   if(this.state.playerTurn != true){return}
+//   let number = prompt("Please enter the right number");
+//   let intNumber = parseInt(number)
+//   if(number === this.state.number.join()){
+//     this.setState({
+//       playerTurn: false,
+//       score: this.state.score + 10
+//     })
+//     setTimeout(() => this.computerActs(), 1000)
+//   } else if(number === null){
+//     alert("do you want to quit?")
+//   } else {
+//     console.log("game over")
+//     this.setState({
+//       number: [],
+//       score: 0
+//     })
+//   }
+// }
 
 // computerActs(){
 //   let randomNum = Math.floor(Math.random()*4) + 1
