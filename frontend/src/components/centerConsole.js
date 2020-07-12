@@ -107,30 +107,15 @@ class CenterConsole extends React.Component{
 //   }
 // }
 
-cool = () => {
-  this.props.computerActs()
-}
-
-cool1 = () => {
-  console.log("hello")
-  this.cool()
-}
-
-
   render(){
   return (
     <div>
     <div className="title">Simon</div>
     <Button onClick={this.props.computerActs}>begin</Button>
-  
-
     </div>
   );
 }
 }
-
-// {console.log(this.props)}
-// {console.log(this.props.state.playerPicks)}
 
 const mapDispatchToProps = {
   // assignDiv, computerTurn, computerMakeMove, playerTurn, success

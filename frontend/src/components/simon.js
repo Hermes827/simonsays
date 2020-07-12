@@ -14,15 +14,15 @@ class Simon extends React.Component{
   recursionFunc(i){
     const computerActs = this.props.computerActs
     const helperFunction = function(arg){
-       return arg()
-     }
+      return arg()
+    }
     setTimeout(function(){
         helperFunction(computerActs);
     }, 2000 * i);
   }
 
   computerTurn = () => {
-    for (let i=0; i<3; i++) {
+    for (let i=0; i<this.props.computerPicks.length; i++) {
      this.recursionFunc(i);
   }
   }

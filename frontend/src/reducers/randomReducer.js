@@ -28,7 +28,7 @@ function glow(arg){
 const initialState = {
   playerTurn: false,
   computerTurn: true,
-  computerPicks: [],
+  computerPicks: ["div1","div2","div1","div3"],
   playerPicks: [],
   score: 0
 }
@@ -47,13 +47,42 @@ function combinedFunction(arg){
 }
 
 function comparePicks(state){
-  console.log(state.computerPicks.join())
-  console.log(state.playerPicks.join())
-  console.log(state.computerPicks.join() === state.playerPicks.join())
-  console.log(state.computerPicks === state.playerPicks)
+  // console.log(state.computerPicks.join())
+  // console.log(state.playerPicks.join())
+  // console.log(state.computerPicks.join() === state.playerPicks.join())
+  // console.log(state.computerPicks === state.playerPicks)
 }
 
+function pickDiv(){
+  let randomDiv = `.div${(Math.floor(Math.random()*4) + 1)}`
+  glow(randomDiv)
+  playAudio(randomDiv)
+}
+
+// function pickDiv(arg){
+//   glow(arg)
+//   playAudio(arg)
+// }
+
 /////////////////////////////////////////////////////////
+
+// recursionFunc(i){
+//   const computerActs = this.props.computerActs
+//   const helperFunction = function(arg){
+//      return arg()
+//    }
+//   setTimeout(function(){
+//       helperFunction(computerActs);
+//   }, 2000 * i);
+// }
+//
+// computerTurn = () => {
+//   for (let i=0; i<3; i++) {
+//    this.recursionFunc(i);
+// }
+// }
+
+/////////////////////////////////////////////////////////////////////////
 
 export function reducer(state = initialState, action) {
   // console.log('reducer', state, action);
@@ -61,10 +90,36 @@ export function reducer(state = initialState, action) {
 
     case 'COMPUTER_ACTS':
     let randomDiv = `.div${(Math.floor(Math.random()*4) + 1)}`
-    glow(randomDiv)
-    playAudio(randomDiv)
-    console.log(state)
-    comparePicks(state)
+    if(state.computerPicks.length === 0){
+      pickDiv(randomDiv)
+    } else if(state.computerPicks.length != 0){
+      console.log("hello")
+      // state.computerPicks.forEach(myFunction);
+      state.computerPicks.forEach(myFunction)
+      function myFunction(item){
+        let divElement = "." + item
+          combinedFunction(divElement)
+        }
+
+    }
+
+    // recursionFunc(i){
+    //   const computerActs = this.props.computerActs
+    //   const helperFunction = function(arg){
+    //     return arg()
+    //   }
+    //   setTimeout(function(){
+    //       helperFunction(computerActs);
+    //   }, 2000 * i);
+    // }
+    //
+    // computerTurn = () => {
+    //   for (let i=0; i<this.props.computerPicks.length; i++) {
+    //    this.recursionFunc(i);
+    // }
+    // }
+
+
     return Object.assign({}, state, {
      computerPicks: [...state.computerPicks, randomDiv.slice(1,5)],
      playerTurn: true
@@ -84,13 +139,13 @@ export function reducer(state = initialState, action) {
    console.log(state)
    return
 
-   case 'YO':
-   hello()
-   return
-
-   case 'WASSUP':
-   whatsup()
-   return
+   // case 'YO':
+   // hello()
+   // return
+   //
+   // case 'WASSUP':
+   // whatsup()
+   // return
 
     default:
       return state
