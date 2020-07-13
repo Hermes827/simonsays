@@ -8,24 +8,27 @@ class Simon extends React.Component{
 
   playerTurn = (e) => {
     this.props.playerActs(e)
-    setTimeout(() => this.computerTurn(), 2000)
+    // setTimeout(()=> this.computerTurn(), 2000)
+    setTimeout(()=> this.props.computerActs(), 2000)
   }
 
-  recursionFunc(i){
-    const computerActs = this.props.computerActs
-    const helperFunction = function(arg){
-      return arg()
-    }
-    setTimeout(function(){
-        helperFunction(computerActs);
-    }, 2000 * i);
-  }
+  // recursionFunc(i){
+  //   const computerActs = this.props.computerActs
+  //   const helperFunction = function(arg){
+  //     return arg()
+  //   }
+  //   setTimeout(function(){
+  //       helperFunction(computerActs);
+  //   }, 2000 * i);
+  // }
 
-  computerTurn = () => {
-    for (let i=0; i<this.props.computerPicks.length; i++) {
-     this.recursionFunc(i);
-  }
-  }
+  // computerTurn(){
+  //   console.log("whats up")
+  //   this.props.computerActs()
+  //   // for (let i=0; i<this.props.computerPicks.length; i++) {
+  //   //  this.recursionFunc(i);
+  //
+  // }
 
   render(){
   return (
@@ -72,7 +75,8 @@ const mapDispatchToProps = {
 const mapStateToProps = (state) => ({
   playerTurn: state.playerTurn,
   number: state.number,
-  score: state.score
+  score: state.score,
+  computerPicks: state.computerPicks
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Simon);
