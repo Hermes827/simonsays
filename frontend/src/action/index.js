@@ -16,11 +16,11 @@ export function computerActs(){
 }
 
 export function playerActs(e){
-  return { type: PLAYERACTS, payload: e}
+  return { type: PLAYERACTS, payload: e }
 }
 
-export function scorePoint(){
-  return { type: SCOREPOINT }
+export function scorePoint(arg, arg1){
+  return { type: SCOREPOINT, payload: arg, payload1: arg1 }
 }
 
 export function yo(){
@@ -30,30 +30,3 @@ export function yo(){
 export function wassup(){
   return { type: WASSUP }
 }
-
-//
-// export function assignDiv() {
-//   return { type: ASSIGN_DIV };
-// }
-//
-// export function click() {
-//   return { type: CLICK };
-// }
-//
-// export function computerTurn(){
-//   return { type: COMPUTER_TURN }
-// }
-//
-// export function computerMakeMove(){
-//   return { type: COMPUTER_MAKE_MOVE }
-// }
-//
-// export function playerTurn(arg){
-//   const audioEl = arg.target.querySelector('audio')
-//   audioEl.play()
-//   return { type: PLAYER_TURN, payload: [arg]}
-// }
-//
-// export function success(){
-//   return { type: SUCCESS }
-// }
