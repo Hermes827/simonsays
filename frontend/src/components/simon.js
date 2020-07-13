@@ -3,32 +3,44 @@ import CenterConsole from './centerConsole.js'
 import { connect } from 'react-redux';
 import { playerActs } from '../action/index.js';
 import { computerActs } from '../action/index.js';
+import { scorePoint} from '../action/index.js';
 
 class Simon extends React.Component{
 
-  playerTurn = (e) => {
-    this.props.playerActs(e)
-    // setTimeout(()=> this.computerTurn(), 2000)
-    setTimeout(()=> this.props.computerActs(), 2000)
+  helperFunction(){
+
   }
 
-  // recursionFunc(i){
-  //   const computerActs = this.props.computerActs
-  //   const helperFunction = function(arg){
-  //     return arg()
-  //   }
-  //   setTimeout(function(){
-  //       helperFunction(computerActs);
-  //   }, 2000 * i);
-  // }
+  playerTurn = (e) => {
+    if(!this.props.playerTurn){return}
+    this.props.playerActs(e)
+    let playerPicksArr = e.target.classList[0].slice(3,4)
+    let newPlayerPicksArr = ""
+    let computerPicksArr = this.props.computerPicks.join()
+    if(this.props.playerPicks.length === 0 && this.props.computerPicks.length === 1){
+      this.props.scorePoint(playerPicksArr, computerPicksArr)
+  } else {
+    let playerPicksArr1 = this.props.playerPicks.join()
+    newPlayerPicksArr = playerPicksArr1 + "," + playerPicksArr
+    this.props.scorePoint(newPlayerPicksArr, computerPicksArr)
+  }
+    setTimeout(()=> this.props.computerActs(), 3000)
+  }
 
-  // computerTurn(){
-  //   console.log("whats up")
-  //   this.props.computerActs()
-  //   // for (let i=0; i<this.props.computerPicks.length; i++) {
-  //   //  this.recursionFunc(i);
+  //need to make it so that  the player can click  the buttons and match the same presses as the computer
+  //currently the player can only press one button before its the compjters turn again, the player
+  //needs to be able to press multiple buttons
+
+  // if(!this.props.playerTurn){return}
+  // this.props.playerActs(e)
+  // let playerPicksArr = e.target.classList[0].slice(3,4)
+  // let computerPicksArr = this.props.computerPicks.join()
+  // console.log(playerPicksArr === computerPicksArr)
   //
-  // }
+  // let playerPicksArr1 = this.props.playerPicks.join()
+  // let random = this.props.playerPicks
+  //
+  // setTimeout(()=> this.props.computerActs(), 3000)
 
   render(){
   return (
@@ -69,14 +81,15 @@ class Simon extends React.Component{
 }
 
 const mapDispatchToProps = {
-  playerActs, computerActs
+  playerActs, computerActs, scorePoint
 };
 
 const mapStateToProps = (state) => ({
   playerTurn: state.playerTurn,
   number: state.number,
   score: state.score,
-  computerPicks: state.computerPicks
+  computerPicks: state.computerPicks,
+  playerPicks: state.playerPicks
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Simon);

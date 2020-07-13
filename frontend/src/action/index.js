@@ -16,11 +16,11 @@ export function computerActs(){
 }
 
 export function playerActs(e){
-  return { type: PLAYERACTS, payload: e}
+  return { type: PLAYERACTS, payload: e }
 }
 
-export function scorePoint(){
-  return { type: SCOREPOINT }
+export function scorePoint(arg, arg1){
+  return { type: SCOREPOINT, payload: arg, payload1: arg1 }
 }
 
 export function yo(){

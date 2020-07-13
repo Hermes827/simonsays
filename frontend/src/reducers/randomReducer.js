@@ -1,6 +1,7 @@
 const initialState = {
   playerTurn: false,
   computerTurn: true,
+  // computerPicks: ["div1","div2","div3","div4"],
   computerPicks: [],
   playerPicks: [],
   score: 0
@@ -27,14 +28,17 @@ function combinedFunction(arg){
   playAudio(arg)
 }
 
-function existingDiv(state, i){
-let newArg = "."+state.computerPicks[i]
+function existingDiv(state, i, arg1){
+if(i+1 === state.computerPicks.length){
+  setTimeout(()=> combinedFunction(arg1), 2000)
+}
+let newArg = ".div"+state.computerPicks[i]
 combinedFunction(newArg)
 }
 
-function computerTurn(state){
+function computerTurn(state, arg1){
   for (let i=0; i<state.computerPicks.length; i++) {
-    const mainFunc = () => existingDiv(state, i)
+    const mainFunc = () => existingDiv(state, i, arg1)
     const helperFunction = function(arg){
       return arg()
     }
@@ -51,34 +55,42 @@ export function reducer(state = initialState, action) {
   switch(action.type){
 
     case 'COMPUTER_ACTS':
-    if(state.computerTurn === false){return}
-    console.log("hello")
-    console.log(state.computerTurn)
     let randomDiv = `.div${(Math.floor(Math.random()*4) + 1)}`
     if(state.computerPicks.length === 0){
       combinedFunction(randomDiv)
     } else if(state.computerPicks.length !== 0){
-      computerTurn(state)
+      computerTurn(state, randomDiv)
     }
     return Object.assign({}, state, {
-     computerPicks: [...state.computerPicks, randomDiv.slice(1,5)],
-     playerTurn: true,
-     computerTurn: false
+     computerPicks: [...state.computerPicks, randomDiv.slice(4,5)],
+     playerTurn: state.playerTurn = true,
+     computerTurn: state.computerTurn = false
    });
 
    case 'PLAYER_ACTS':
-    if(state.playerTurn != true){return}
+   // console.log(state)
     const divClassName = "." + action.payload.target.classList[0]
     glow(divClassName)
     playAudio(divClassName)
     return Object.assign({}, state, {
-     playerPicks: [...state.playerPicks, divClassName.slice(1,5)],
-     playerTurn: false,
-     computerTurn: true
-   })
+     playerPicks: [...state.playerPicks, divClassName.slice(4,5)],
+     playerTurn: state.playerTurn = false,
+     computerTurn: state.playerTurn = true
+    })
 
    case 'SCORE_POINT':
-   console.log(state)
+   console.log(action.payload + action.payload1)
+   if(action.payload ===  action.payload1){
+     return Object.assign({}, state, {
+      score: state.score + 100
+     })
+   } else {
+     console.log("wrong")
+     return Object.assign({}, state, {
+      score: state.score = 0,
+      computerPicks: []
+     })
+   }
    return
 
     default:

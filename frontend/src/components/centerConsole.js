@@ -1,16 +1,9 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
-// import { assignDiv } from '../action/index.js';
-// import { computerTurn } from '../action/index.js';
-// import { computerMakeMove } from '../action/index.js'
-// import { playerTurn } from '../action/index.js';
-// import { success } from '../action/index.js';
 import { computerActs } from '../action/index.js';
 import { playerActs } from '../action/index.js';
 import { scorePoint } from '../action/index.js';
-import { yo } from '../action/index.js';
-import { wassup } from '../action/index.js';
 
 class CenterConsole extends React.Component{
 
@@ -18,14 +11,15 @@ class CenterConsole extends React.Component{
   return (
     <div>
     <div className="title">Simon</div>
-    <Button onClick={this.props.computerActs}>begin</Button>
+    {this.props.score}<br/>
+    <Button onClick={(this.props.computerTurn) ? this.props.computerActs : null}>begin</Button>
     </div>
   );
 }
 }
 
 const mapDispatchToProps = {
-  computerActs, playerActs, scorePoint, yo, wassup
+  computerActs, playerActs, scorePoint
 };
 
 const mapStateToProps = (state) => ({
