@@ -11,11 +11,9 @@ class Simon extends React.Component{
   playerTurn = (e) => {
     e.persist()
     if(!this.props.playerTurn){return}
-    console.log("hi")
     this.props.playerActs(e)
     let playerPicksArr = e.target.classList[0].slice(3,4)
     random.push(playerPicksArr)
-    console.log(random)
     let newPlayerPicksArr = random.join()
     let computerPicksArr = this.props.computerPicks.join()
     for(let i=0;i<this.props.computerPicks.length;i++){
@@ -81,10 +79,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   playerTurn: state.playerTurn,
-  number: state.number,
-  score: state.score,
   computerPicks: state.computerPicks,
-  playerPicks: state.playerPicks,
   computerTurnNow: state.computerTurnNow
 })
 

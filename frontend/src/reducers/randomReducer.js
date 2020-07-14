@@ -1,9 +1,7 @@
 const initialState = {
   playerTurn: false,
   computerTurn: true,
-  // computerPicks: ["div1","div2"],
   computerPicks: [],
-  playerPicks: [],
   score: 0,
   computerTurnNow: false
 }
@@ -14,14 +12,12 @@ function removeGlow(arg){
 
 function playAudio(arg){
   const divElement = document.querySelector(arg)
-  // if(divElement === null){return}
   let audioEl = divElement.querySelector('audio')
   audioEl.play()
 }
 
 function glow(arg){
   const divElement = document.querySelector(arg)
-  // if(divElement === null){return}
   divElement.classList.add("glow")
   setTimeout(() => removeGlow(divElement), 850)
 }
@@ -71,19 +67,14 @@ export function reducer(state = initialState, action) {
    });
 
    case 'PLAYER_ACTS':
-   // console.log(state)
     const divClassName = "." + action.payload.target.classList[0]
     combinedFunction(divClassName)
     return Object.assign({}, state, {
-     // playerPicks: [...state.playerPicks, divClassName.slice(4,5)],
-     // playerTurn: state.playerTurn = false,
      computerTurn: state.computerTurn = true
     })
-    break;
 
    case 'SCORE_POINT':
    if(action.payload === action.payload1){
-     console.log("cool")
      return Object.assign({}, state, {
       score: state.score + 100,
       computerTurnNow: state.computerTurnNow = true,
