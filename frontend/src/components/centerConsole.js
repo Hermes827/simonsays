@@ -7,12 +7,16 @@ import { scorePoint } from '../action/index.js';
 
 class CenterConsole extends React.Component{
 
+  delayComputer = () => {
+    setTimeout(this.props.computerActs, 250)
+  }
+
   render(){
   return (
     <div>
     <div className="title">Simon</div>
     {this.props.score}<br/>
-    <Button onClick={(this.props.computerTurn) ? this.props.computerActs : null}>begin</Button>
+  <Button onClick={(this.props.computerTurn) ? this.delayComputer : null}>begin</Button>
     </div>
   );
 }

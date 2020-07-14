@@ -1,10 +1,11 @@
 const initialState = {
   playerTurn: false,
   computerTurn: true,
-  // computerPicks: ["div1","div2","div3","div4"],
+  // computerPicks: ["div1","div2"],
   computerPicks: [],
   playerPicks: [],
-  score: 0
+  score: 0,
+  computerTurnNow: false
 }
 
 function removeGlow(arg){
@@ -13,12 +14,14 @@ function removeGlow(arg){
 
 function playAudio(arg){
   const divElement = document.querySelector(arg)
+  // if(divElement === null){return}
   let audioEl = divElement.querySelector('audio')
   audioEl.play()
 }
 
 function glow(arg){
   const divElement = document.querySelector(arg)
+  // if(divElement === null){return}
   divElement.classList.add("glow")
   setTimeout(() => removeGlow(divElement), 850)
 }
@@ -30,7 +33,7 @@ function combinedFunction(arg){
 
 function existingDiv(state, i, arg1){
 if(i+1 === state.computerPicks.length){
-  setTimeout(()=> combinedFunction(arg1), 2000)
+  setTimeout(()=> combinedFunction(arg1), 1000)
 }
 let newArg = ".div"+state.computerPicks[i]
 combinedFunction(newArg)
@@ -44,7 +47,7 @@ function computerTurn(state, arg1){
     }
    setTimeout(function(){
        helperFunction(mainFunc);
-   }, 2000 * i);
+   }, 1000 * i);
 }
 }
 
@@ -70,28 +73,33 @@ export function reducer(state = initialState, action) {
    case 'PLAYER_ACTS':
    // console.log(state)
     const divClassName = "." + action.payload.target.classList[0]
-    glow(divClassName)
-    playAudio(divClassName)
+    combinedFunction(divClassName)
     return Object.assign({}, state, {
-     playerPicks: [...state.playerPicks, divClassName.slice(4,5)],
-     playerTurn: state.playerTurn = false,
-     computerTurn: state.playerTurn = true
+     // playerPicks: [...state.playerPicks, divClassName.slice(4,5)],
+     // playerTurn: state.playerTurn = false,
+     computerTurn: state.computerTurn = true
     })
+    break;
 
    case 'SCORE_POINT':
-   console.log(action.payload + action.payload1)
-   if(action.payload ===  action.payload1){
+   if(action.payload === action.payload1){
+     console.log("cool")
      return Object.assign({}, state, {
-      score: state.score + 100
+      score: state.score + 100,
+      computerTurnNow: state.computerTurnNow = true,
+      playerTurn: state.playerTurn = false,
+      computerTurn: state.computerTurn = true
      })
    } else {
-     console.log("wrong")
+     alert("wrong, please play again")
      return Object.assign({}, state, {
       score: state.score = 0,
-      computerPicks: []
+      computerPicks: [],
+      computerTurnNow: state.computerTurnNow = false,
+      computerTurn: state.computerTurn = true,
+      playerTurn: state.playerTurn = false
      })
    }
-   return
 
     default:
       return state
